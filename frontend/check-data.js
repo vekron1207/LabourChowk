@@ -1,0 +1,1 @@
+console.log('Jobs:', JSON.parse(localStorage.getItem('labour_chowk_jobs') || '[]')); console.log('Labour Profiles:', JSON.parse(localStorage.getItem('labour_chowk_labour_profiles') || '[]')); console.log('Users:', JSON.parse(localStorage.getItem('labour_chowk_users') || '[]'));

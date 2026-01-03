@@ -1,0 +1,21 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "labourProfiles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "available", "order": "DESCENDING" },
+        { "fieldPath": "updatedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
