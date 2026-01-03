@@ -1,359 +1,330 @@
-🏗️ Labour Chowk (लेबर चौक)
+# Labour Chowk (लेबर चौक)
 
-Labour Chowk is a simple, problem-first platform that digitizes the offline daily-wage labour marketplace seen at physical Labour Chowks across India.
+Labour Chowk is a digital platform designed to modernize the traditional daily-wage labour marketplace found at physical labour gathering points across India. The application connects daily-wage workers directly with contractors and individuals seeking their services, eliminating intermediaries and reducing friction in the hiring process.
 
-It helps:
+## Overview
 
-Labourers find work faster
+This platform addresses a real-world problem by providing a simple, accessible solution for both labourers seeking work and employers looking to hire skilled daily-wage workers. The system facilitates direct connections through location-based matching and phone-based communication.
 
-Contractors & individuals hire labour easily
+**Target Users:**
+- Daily-wage labourers seeking short or long-term work opportunities
+- Contractors and individuals requiring skilled labour for construction and maintenance projects
 
-Both sides connect directly, without middlemen
+## Project Philosophy
 
-This project is intentionally designed as a low-cost, cross-platform, free-first application focused on usability, accessibility, and real-world constraints.
+The project adheres to several core principles:
 
-🌱 Project Philosophy
+- **Problem-First Approach**: Focused on solving an observed, real-world challenge
+- **Accessibility**: Designed for users with varying literacy levels and low-end devices
+- **Language Support**: Hindi-first interface with English translation support
+- **Simplicity**: No forced monetization or manipulative design patterns
+- **Cross-Platform**: Single codebase serving Android, iOS, and web platforms
 
-Solve a real, observed problem
+## Core Features
 
-Design for low literacy & low-end devices
+### For Labour (श्रमिक)
 
-Hindi-first, English-supported
+- Create and manage professional profiles
+- Set expected daily wage rates
+- Toggle real-time availability status
+- Share location and skill information
+- Receive direct contact from potential employers
 
-No forced monetization
+### For Employers (ठेकेदार / व्यक्ति)
 
-No dark patterns
+- Post job requirements with offered rates
+- Browse nearby available labourers
+- Filter by skill type and distance
+- Contact workers directly via phone
+- Manage job status and completion
 
-One codebase → Android + iOS + Web
+### Platform Functionality
 
-This is a problem-solving project, not a gig-economy clone.
+- **Location-Based Matching**: Workers and jobs are matched based on proximity
+- **Direct Communication**: Phone-based contact system (no in-app chat in v1)
+- **Skill Categories**: Comprehensive list of trade skills with bilingual support
+- **Simple Authentication**: Phone number OTP-based login system
+- **No Payment Processing**: Trust-based, direct payment outside the app (v1)
 
-👥 User Types
-👷 Labour (श्रमिक)
+## Technical Architecture
 
-Daily wage workers (मिस्त्री, हेल्पर, पेंटर, etc.)
+### Frontend
 
-Looking for short or long-term work
+- **Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Progressive Web App**: PWA-enabled for installability
+- **Mobile Packaging**: Capacitor for native Android and iOS builds
 
-Sets their own expected daily rate
+### Backend
 
-Shares availability & location
+- **Authentication**: Firebase Phone OTP
+- **Database**: Cloud Firestore (NoSQL)
+- **Hosting**: Firebase Hosting
+- **Functions**: Cloud Functions (optional for future features)
 
-🧑‍💼 Contractor / Individual (ठेकेदार / व्यक्ति)
+### Platform Support
 
-Contractors hiring daily labour
+| Platform | Status |
+|----------|--------|
+| Web (PWA) | Supported |
+| Android | Supported |
+| iOS | Supported |
 
-Individuals hiring labour for small jobs
+## Supported Skills
 
-Posts job requirements and offered rate
+The platform supports the following trade categories with bilingual labels:
 
-🔁 Core Concept
+| Skill | Hindi Name | English Name |
+|-------|------------|--------------|
+| Mason | मिस्त्री | Mason |
+| Painter | पेंटर | Painter |
+| Electrician | इलेक्ट्रीशियन | Electrician |
+| Plumber | प्लम्बर | Plumber |
+| Carpenter | बढ़ई | Carpenter |
+| Helper | हेल्पर | Helper |
+| Cleaner | सफाई कामगार | Cleaner |
+| Welder | वेल्डर | Welder |
+| Loader | माल ढोने वाला | Loader/Porter |
+| Construction Worker | साइट वर्कर | Construction Worker |
 
-Labour Chowk is a local two-sided marketplace:
+## Data Model
 
-Labour lists availability
-
-Employers browse nearby labour
-
-Direct phone calls (no chat initially)
-
-No in-app payments (v1)
-
-🧠 Key Design Decisions
-Decision	Reason
-PWA first	One codebase, cheapest
-Phone OTP login	Email not required
-Hindi + icons	Low literacy friendly
-No payments v1	Trust & simplicity
-Location based	Real-world relevance
-🧱 Tech Stack
-Frontend (Single Codebase)
-
-React + Vite
-
-PWA enabled
-
-Tailwind CSS
-
-TypeScript (recommended)
-
-Mobile App Packaging
-
-Capacitor (Ionic)
-
-Wraps web app into Android & iOS
-
-No Swift / iOS coding needed
-
-Backend
-
-Firebase
-
-Phone OTP Authentication
-
-Firestore (NoSQL database)
-
-Hosting
-
-Cloud Functions (optional)
-
-Maps & Location
-
-Google Maps API (or Mapbox later)
-
-📱 Platform Support
-
-✅ Android
-
-✅ iOS
-
-✅ Web (PWA)
-
-❌ Desktop-first UI
-
-🧭 User Flow
-First Launch (All Users)
-
-Select language (Hindi / English)
-
-Login using phone number (OTP)
-
-Select role:
-
-👷 Labour
-
-🧑‍💼 Contractor / Individual
-
-👷 Labour Flow
-
-Create profile:
-
-Name
-
-Skill selection (icons + Hindi)
-
-Expected daily rate
-
-Location (auto via GPS)
-
-Availability (Today / Tomorrow)
-
-Home Screen:
-
-Availability toggle (ON / OFF)
-
-Status: “आप आस-पास के काम के लिए उपलब्ध हैं”
-
-Employer calls labour directly
-
-🧑‍💼 Contractor / Individual Flow
-
-Post job:
-
-Required skill
-
-Location
-
-Rate offered
-
-Duration (1 day / multiple days)
-
-Browse nearby labour:
-
-Sorted by distance & rate
-
-Filter by skill
-
-Call labour
-
-Mark job as completed
-
-🖥️ Core Screens (MVP)
-Shared
-
-Language selection
-
-OTP login
-
-Role selection
-
-Labour
-
-Profile setup
-
-Availability toggle
-
-Profile preview
-
-Employer
-
-Post job
-
-Labour list
-
-Labour profile view
-
-Total: ~8–10 screens
-
-🔨 Skills / Work Categories (Bilingual)
-
-Skills are shown with:
-
-Icon
-
-Hindi name (primary)
-
-English name (secondary)
-
-Icon	Hindi Name	English Name	Key
-🧱	मिस्त्री	Mason	mason
-🎨	पेंटर	Painter	painter
-⚡	इलेक्ट्रीशियन	Electrician	electrician
-🚰	प्लम्बर	Plumber	plumber
-🪚	बढ़ई	Carpenter	carpenter
-🧱	हेल्पर	Helper	helper
-🧹	सफाई कामगार	Cleaner	cleaner
-🛠️	वेल्डर	Welder	welder
-🚚	माल ढोने वाला	Loader / Porter	loader
-🏗️	साइट वर्कर	Construction Worker	construction_worker
-🗃️ Data Model (Firebase)
-User
+### User
+```typescript
 {
-  "id": "string",
-  "phone": "string",
-  "role": "labour | employer",
-  "name": "string",
-  "language": "hi | en",
-  "location": { "lat": 0, "lng": 0 }
+  id: string
+  phone: string
+  role: 'labour' | 'employer'
+  name: string
+  language: 'hi' | 'en'
+  location: { lat: number, lng: number }
+  createdAt: string
 }
+```
 
-LabourProfile
+### LabourProfile
+```typescript
 {
-  "userId": "string",
-  "skills": ["mason", "helper"],
-  "dailyRate": 700,
-  "available": true
+  userId: string
+  skills: SkillKey[]
+  dailyRate: number
+  available: boolean
+  updatedAt: string
 }
+```
 
-Job
+### Job
+```typescript
 {
-  "id": "string",
-  "postedBy": "userId",
-  "skill": "mason",
-  "rate": 800,
-  "location": {},
-  "status": "open | closed"
+  id: string
+  postedBy: string
+  skill: SkillKey
+  rate: number
+  location: { lat: number, lng: number }
+  status: 'open' | 'closed' | 'in_progress' | 'completed'
+  duration: number
+  createdAt: string
+  description?: string
 }
+```
 
-🚫 Out of Scope (v1)
+## User Flow
 
-Payments / wallet
+### Initial Setup (All Users)
 
-Chat / messaging
+1. Select preferred language (Hindi or English)
+2. Authenticate using phone number via OTP
+3. Choose user role (Labour or Employer)
 
-Ratings (stars)
+### Labour Workflow
 
-Escrow
+1. Complete profile setup
+   - Enter name and personal details
+   - Select applicable skills
+   - Set expected daily wage rate
+   - Enable location access
+2. Set availability status
+3. Receive calls from interested employers
+4. Accept or decline opportunities
 
-AI matching
+### Employer Workflow
 
-Dispute resolution
+1. Create job posting
+   - Specify required skill
+   - Set offered wage rate
+   - Define job location and duration
+2. Browse nearby available labourers
+3. Filter by skill type and proximity
+4. Contact selected workers directly
+5. Update job status upon completion
 
-Heavy analytics
+## Development Setup
 
-🛠️ Development Roadmap
-Phase 1 – Setup
+### Prerequisites
 
-React + Vite
+- Node.js (v16 or higher)
+- npm or yarn
+- Firebase CLI
+- Git
 
-Tailwind
+### Installation
 
-Firebase Auth (OTP)
+```bash
+# Clone the repository
+git clone <repository-url>
 
-PWA config
+# Install frontend dependencies
+cd frontend
+npm install
 
-Language support
+# Install Firebase tools
+npm install -g firebase-tools
+```
 
-Phase 2 – Core Features
+### Local Development
 
-Labour profile creation
+```bash
+# Run development server (localhost only)
+cd frontend
+npm run dev
 
-Job posting
+# Run development server (network accessible)
+npm run dev:network
+```
 
-Labour browsing
+### Build for Production
 
-Location filtering
+```bash
+# Build optimized production bundle
+cd frontend
+npm run build
+```
 
-Phase 3 – Mobile Packaging
+### Deployment
 
-Capacitor Android build
+#### Web (Firebase Hosting)
 
-Capacitor iOS build (Mac required)
+```bash
+cd backend
+firebase login
+firebase deploy --only hosting
+```
 
-Phase 4 – Pilot
+#### Android
 
-Onboard 10–20 labourers
+```bash
+# Build and sync with Capacitor
+npx cap sync android
+npx cap open android
+```
 
-Test with real contractors
+#### iOS (requires macOS)
 
-Iterate based on usage
+```bash
+# Build and sync with Capacitor
+npx cap sync ios
+npx cap open ios
+```
 
-🚀 Deployment
-Web
+## Design Decisions
 
-Firebase Hosting
+| Decision | Rationale |
+|----------|-----------|
+| PWA-first approach | Single codebase, minimal development cost |
+| Phone OTP authentication | Email not required for target demographic |
+| Hindi with icon support | Accommodates users with limited literacy |
+| No in-app payments (v1) | Maintains simplicity and builds trust |
+| Location-based matching | Reflects real-world proximity requirements |
+| Direct phone communication | Familiar and accessible for all users |
 
-PWA installable via browser
+## Out of Scope (v1)
 
-Android
+The following features are intentionally excluded from the initial release:
 
-Google Play (Internal Testing)
+- In-app payment processing or digital wallet
+- Real-time chat or messaging system
+- Rating and review mechanisms
+- Escrow or payment guarantee services
+- AI-powered matching algorithms
+- Formal dispute resolution system
+- Advanced analytics or reporting
 
-iOS
+## Development Roadmap
 
-TestFlight → App Store (optional)
+### Phase 1: Foundation
+- React + Vite project setup
+- Tailwind CSS integration
+- Firebase authentication (Phone OTP)
+- PWA configuration
+- Multi-language support system
 
-💰 Monetization (Optional, Later)
+### Phase 2: Core Features
+- Labour profile creation and management
+- Job posting functionality
+- Labour browsing and filtering
+- Location-based search and matching
 
-Labour Chowk is free-first.
+### Phase 3: Mobile Distribution
+- Android application build via Capacitor
+- iOS application build (requires macOS)
+- Platform-specific testing and optimization
 
-Possible future options:
+### Phase 4: Pilot Program
+- Onboard initial group of labourers (10-20 users)
+- Test with real contractors
+- Gather feedback and iterate on design
 
-Small per-hire fee (₹10–₹20)
+## Deployment Platforms
 
-Contractor subscriptions
+| Platform | Distribution Method |
+|----------|-------------------|
+| Web | Firebase Hosting, installable as PWA |
+| Android | Google Play Store (Internal Testing, then Production) |
+| iOS | TestFlight (Beta), then App Store |
 
-CSR / NGO partnerships
+## Future Monetization Options
 
-Municipal tie-ups
+The platform is designed as a free-first service. Potential future revenue models include:
 
-Donations
+- Minimal per-hire transaction fee (₹10-₹20)
+- Premium employer subscription tiers
+- Corporate Social Responsibility (CSR) partnerships
+- Municipal government integrations
+- Community donations and grants
 
-🧑‍💻 Developer Guidelines
+All monetization strategies will prioritize user dignity and platform accessibility.
 
-Optimize for low-end Android phones
+## Performance Optimization
 
-Use large touch targets
+The application is optimized for:
 
-Prefer icons over text
+- Low-end Android devices (2GB RAM or less)
+- Unstable network connections (2G/3G)
+- Minimal data consumption
+- Small application bundle size
+- Large touch targets for accessibility
+- Icon-based navigation to reduce text dependency
 
-Keep bundle size small
+## Contributing
 
-Assume unstable internet
+Contributions are welcome. Please ensure all contributions:
 
-📜 License
+- Maintain accessibility standards
+- Support bilingual interface (Hindi and English)
+- Optimize for low-end devices
+- Follow existing code style and conventions
+- Include appropriate documentation
 
-To be decided:
+## License
 
-Open-source
+License to be determined. The project aims to remain:
 
-Community-driven
+- Open-source and transparent
+- Community-driven
+- Non-exploitative
+- Accessible to all
 
-Non-exploitative
+## Project Mission
 
-❤️ Final Note
-
-Labour Chowk exists to respect labour, reduce uncertainty, and make work accessible with dignity.
-
-Even if it stays small or free forever —
-it solves a real problem, and that matters.
+Labour Chowk exists to provide dignity and accessibility to daily-wage workers while simplifying the hiring process for employers. The platform prioritizes solving real problems over maximizing profit, with a commitment to serving its community effectively and ethically.
