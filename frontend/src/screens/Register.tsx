@@ -4,18 +4,23 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Button, Card, Input } from '../components';
 import { t } from '../utils/translations';
+import { UserRole } from '../types';
 
-export const Login: React.FC = () => {
+export const Register: React.FC = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
-  const { login } = useAuth();
+  const { register } = useAuth();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleLogin = async () => {
+  // Get role from localStorage (set in RoleSelection screen)
+  const selectedRole = (localStorage.getItem('selectedRole') as UserRole) || 'labour';
+
+  const handleRegister = async () => {
     if (phone.length !== 10) {
       setError('Please enter a valid 10-digit phone number');
       return;
@@ -26,32 +31,41 @@ export const Login: React.FC = () => {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
     setLoading(true);
     setError('');
 
     try {
-      await login(phone, password);
+      await register(phone, password, selectedRole, language);
+      localStorage.removeItem('selectedRole'); // Clean up
       navigate('/profile-setup');
     } catch (err: any) {
-      console.error('Login error:', err);
-      setError(err.message || 'Login failed. Please check your credentials.');
+      console.error('Registration error:', err);
+      setError(err.message || 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleRegister = () => {
-    navigate('/register');
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary-50 to-white flex items-center justify-center p-4">
       <Card className="w-full max-w-md" padding="large">
         <div className="text-center mb-8">
-          <div className="text-5xl mb-4">📱</div>
+          <div className="text-5xl mb-4">📝</div>
           <h1 className={`text-2xl font-bold text-gray-900 mb-2 ${language === 'hi' ? 'font-hindi' : ''}`}>
-            {t('loginWithPhone', language)}
+            {t('register', language)}
           </h1>
+          <p className={`text-sm text-gray-600 ${language === 'hi' ? 'font-hindi' : ''}`}>
+            {t(selectedRole === 'labour' ? 'labour' : 'employer', language)}
+          </p>
         </div>
 
         {error && (
@@ -90,25 +104,39 @@ export const Login: React.FC = () => {
             </button>
           </div>
 
+          <Input
+            label={language === 'hi' ? 'पासवर्ड की पुष्टि करें' : 'Confirm Password'}
+            value={confirmPassword}
+            onChange={setConfirmPassword}
+            type={showPassword ? 'text' : 'password'}
+            placeholder={language === 'hi' ? 'पासवर्ड फिर से दर्ज करें' : 'Re-enter your password'}
+            required
+          />
+
           <Button
-            onClick={handleLogin}
+            onClick={handleRegister}
             fullWidth
             size="large"
-            disabled={phone.length !== 10 || password.length < 6 || loading}
+            disabled={
+              phone.length !== 10 ||
+              password.length < 6 ||
+              confirmPassword.length < 6 ||
+              loading
+            }
           >
-            {loading ? 'Logging in...' : t('login', language)}
+            {loading ? (language === 'hi' ? 'रजिस्टर हो रहा है...' : 'Registering...') : t('register', language)}
           </Button>
 
           <div className="text-center mt-4">
             <span className={`text-gray-600 ${language === 'hi' ? 'font-hindi' : ''}`}>
-              {t('newUser', language)}{' '}
+              {language === 'hi' ? 'पहले से खाता है?' : 'Already have account?'}{' '}
             </span>
             <button
-              onClick={handleRegister}
+              onClick={handleLogin}
               className={`text-primary-600 hover:text-primary-700 font-semibold ${language === 'hi' ? 'font-hindi' : ''}`}
               disabled={loading}
             >
-              {t('register', language)}
+              {t('login', language)}
             </button>
           </div>
         </div>

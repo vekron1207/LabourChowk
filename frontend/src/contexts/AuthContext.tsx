@@ -1,12 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User } from '../types';
+import { authAPI, userAPI } from '../services/api';
+import { User, UserRole, Language } from '../types';
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (user: User) => void;
-  logout: () => void;
-  updateUser: (userData: Partial<User>) => void;
+  register: (phone: string, password: string, role: UserRole, language?: Language) => Promise<void>;
+  login: (phone: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  updateUser: (userData: Partial<User>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -16,38 +18,77 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        console.error('Failed to parse user data:', error);
-        localStorage.removeItem('user');
+    const initializeAuth = async () => {
+      const token = authAPI.getToken();
+
+      if (token) {
+        try {
+          const currentUser = await authAPI.getCurrentUser();
+          setUser(currentUser);
+        } catch (error) {
+          console.error('Failed to get current user:', error);
+          authAPI.logout();
+        }
       }
-    }
-    setLoading(false);
+
+      setLoading(false);
+    };
+
+    initializeAuth();
   }, []);
 
-  const login = (userData: User) => {
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+  const register = async (
+    phone: string,
+    password: string,
+    role: UserRole,
+    language: Language = 'hi'
+  ): Promise<void> => {
+    try {
+      const { user } = await authAPI.register(phone, password, role, language);
+      setUser(user);
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
+    }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
+  const login = async (phone: string, password: string): Promise<void> => {
+    try {
+      const { user } = await authAPI.login(phone, password);
+      setUser(user);
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
-  const updateUser = (userData: Partial<User>) => {
-    if (user) {
-      const updatedUser = { ...user, ...userData };
+  const logout = async () => {
+    try {
+      authAPI.logout();
+      setUser(null);
+      localStorage.removeItem('selectedRole');
+    } catch (error) {
+      console.error('Logout error:', error);
+      throw error;
+    }
+  };
+
+  const updateUser = async (userData: Partial<User>) => {
+    if (!user) {
+      throw new Error('No user logged in');
+    }
+
+    try {
+      const updatedUser = await userAPI.updateUser(user.id, userData);
       setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
+    } catch (error) {
+      console.error('Update user error:', error);
+      throw error;
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, updateUser }}>
+    <AuthContext.Provider value={{ user, loading, register, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,6 +1,7 @@
 export { LanguageSelection } from './LanguageSelection';
 export { RoleSelection } from './RoleSelection';
 export { Login } from './Login';
+export { Register } from './Register';
 export { ProfileSetup } from './ProfileSetup';
 export { LabourHome } from './LabourHome';
 export { EmployerHome } from './EmployerHome';

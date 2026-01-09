@@ -24,6 +24,11 @@ export const translations = {
   sendOTP: { hi: 'OTP भेजें', en: 'Send OTP' },
   enterOTP: { hi: 'OTP दर्ज करें', en: 'Enter OTP' },
   verify: { hi: 'सत्यापित करें', en: 'Verify' },
+  login: { hi: 'लॉगिन करें', en: 'Login' },
+  password: { hi: 'पासवर्ड', en: 'Password' },
+  enterPassword: { hi: 'अपना पासवर्ड दर्ज करें', en: 'Enter your password' },
+  register: { hi: 'रजिस्टर करें', en: 'Register' },
+  newUser: { hi: 'नए उपयोगकर्ता?', en: 'New user?' },
 
   // Profile
   createProfile: { hi: 'प्रोफाइल बनाएं', en: 'Create Profile' },

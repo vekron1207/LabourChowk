@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageSelection } from './screens/LanguageSelection';
 import { RoleSelection } from './screens/RoleSelection';
 import { Login } from './screens/Login';
+import { Register } from './screens/Register';
 import { ProfileSetup } from './screens/ProfileSetup';
 import { LabourHome } from './screens/LabourHome';
 import { EmployerHome } from './screens/EmployerHome';
@@ -51,6 +52,7 @@ function AppRoutes() {
       <Route path="/" element={<LanguageSelection />} />
       <Route path="/role-selection" element={<RoleSelection />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route
         path="/profile-setup"
         element={
