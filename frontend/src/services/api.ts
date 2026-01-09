@@ -115,7 +115,7 @@ export const authAPI = {
 
 // User API
 export const userAPI = {
-  async updateUser(userId: string, userData: any) {
+  async updateUser(userData: any) {
     const token = getAuthToken();
     if (!token) {
       throw new Error('No auth token found');

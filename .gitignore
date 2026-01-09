@@ -44,3 +44,5 @@ ui-debug.log
 # Cache
 .cache/
 *.tsbuildinfo
+
+.vercel

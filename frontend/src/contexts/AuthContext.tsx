@@ -79,7 +79,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     try {
-      const updatedUser = await userAPI.updateUser(user.id, userData);
+      const updatedUser = await userAPI.updateUser(userData);
       setUser(updatedUser);
     } catch (error) {
       console.error('Update user error:', error);

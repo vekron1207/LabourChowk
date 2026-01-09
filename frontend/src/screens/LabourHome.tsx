@@ -41,7 +41,7 @@ export const LabourHome: React.FC = () => {
     window.addEventListener('focus', handleFocus);
 
     // Auto-refresh jobs every 3 seconds when on jobs tab
-    let intervalId: NodeJS.Timeout | null = null;
+    let intervalId: number | null = null;
     if (activeTab === 'jobs') {
       intervalId = setInterval(loadJobs, 3000);
     }
