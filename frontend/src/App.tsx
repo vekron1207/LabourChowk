@@ -12,7 +12,6 @@ import { EmployerHome } from './screens/EmployerHome';
 import { PostJob } from './screens/PostJob';
 import { Profile } from './screens/Profile';
 import { JobDashboard } from './screens/JobDashboard';
-import { DebugPanel } from './components/DebugPanel';
 
 // Protected route wrapper component
 const ProtectedRoute: React.FC<{
@@ -124,7 +123,6 @@ function App() {
       <LanguageProvider>
         <AuthProvider>
           <AppRoutes />
-          <DebugPanel />
         </AuthProvider>
       </LanguageProvider>
     </BrowserRouter>

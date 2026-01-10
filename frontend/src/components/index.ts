@@ -7,4 +7,3 @@ export { ToggleSwitch } from './ToggleSwitch';
 export { DistanceSlider } from './DistanceSlider';
 export { LocationPermission } from './LocationPermission';
 export { Header } from './Header';
-export { DebugPanel } from './DebugPanel';
