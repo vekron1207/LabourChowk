@@ -9,6 +9,9 @@ export const DebugPanel: React.FC = () => {
   const [profiles, setProfiles] = useState<any[]>([]);
   const [users, setUsers] = useState<any[]>([]);
 
+  // Only show debug panel in development
+  const isDevelopment = import.meta.env.DEV;
+
   useEffect(() => {
     if (isOpen) {
       setJobs(getAllJobs());
@@ -16,6 +19,11 @@ export const DebugPanel: React.FC = () => {
       setUsers(getAllUsers());
     }
   }, [isOpen]);
+
+  // Don't render anything in production
+  if (!isDevelopment) {
+    return null;
+  }
 
   if (!isOpen) {
     return (
