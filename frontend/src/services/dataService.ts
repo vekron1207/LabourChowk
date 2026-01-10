@@ -4,6 +4,7 @@
  */
 
 import { Job, LabourProfile } from '../types';
+import { logger } from '../utils/logger';
 
 const STORAGE_KEYS = {
   JOBS: 'labour_chowk_jobs',
@@ -285,6 +286,6 @@ export const getDataStats = () => {
 export const initializeSampleData = (): void => {
   // Only initialize if no data exists
   if (getAllJobs().length === 0 && getAllLabourProfiles().length === 0) {
-    console.log('No data found. You can start posting jobs or registering as labour!');
+    logger.log('No data found. You can start posting jobs or registering as labour!');
   }
 };

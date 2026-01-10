@@ -6,6 +6,7 @@ import { SkillKey, LabourProfile } from '../types';
 import { Button, Card, Input, SkillSelector, LocationPermission } from '../components';
 import { t } from '../utils/translations';
 import { saveLabourProfile, saveUserExtendedInfo } from '../services/dataService';
+import { logger } from '../utils/logger';
 
 export const ProfileSetup: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export const ProfileSetup: React.FC = () => {
 
   // Debug: Log user role when component mounts
   React.useEffect(() => {
-    console.log('ProfileSetup: User role =', user?.role);
+    logger.log('ProfileSetup: User role =', user?.role);
   }, [user]);
 
   const handleSkillToggle = (skill: SkillKey) => {

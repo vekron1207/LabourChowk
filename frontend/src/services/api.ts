@@ -1,3 +1,5 @@
+import { logger } from '../utils/logger';
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface ApiResponse<T> {
@@ -28,7 +30,7 @@ async function apiRequest<T>(
 
     return { data };
   } catch (error) {
-    console.error('API request error:', error);
+    logger.error('API request error:', error);
     return { error: 'Network error. Please check your connection.' };
   }
 }

@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Button, Card, Input } from '../components';
 import { t } from '../utils/translations';
+import { logger } from '../utils/logger';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export const Login: React.FC = () => {
       await login(phone, password);
       navigate('/profile-setup');
     } catch (err: any) {
-      console.error('Login error:', err);
+      logger.error('Login error:', err);
       setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);

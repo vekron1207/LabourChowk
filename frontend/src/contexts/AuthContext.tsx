@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI, userAPI } from '../services/api';
 import { User, UserRole, Language } from '../types';
+import { logger } from '../utils/logger';
 
 interface AuthContextType {
   user: User | null;
@@ -26,7 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           const currentUser = await authAPI.getCurrentUser();
           setUser(currentUser);
         } catch (error) {
-          console.error('Failed to get current user:', error);
+          logger.error('Failed to get current user:', error);
           authAPI.logout();
         }
       }
@@ -47,7 +48,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { user } = await authAPI.register(phone, password, role, language);
       setUser(user);
     } catch (error) {
-      console.error('Registration error:', error);
+      logger.error('Registration error:', error);
       throw error;
     }
   };
@@ -57,7 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { user } = await authAPI.login(phone, password);
       setUser(user);
     } catch (error) {
-      console.error('Login error:', error);
+      logger.error('Login error:', error);
       throw error;
     }
   };
@@ -68,7 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(null);
       localStorage.removeItem('selectedRole');
     } catch (error) {
-      console.error('Logout error:', error);
+      logger.error('Logout error:', error);
       throw error;
     }
   };
@@ -82,7 +83,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const updatedUser = await userAPI.updateUser(userData);
       setUser(updatedUser);
     } catch (error) {
-      console.error('Update user error:', error);
+      logger.error('Update user error:', error);
       throw error;
     }
   };

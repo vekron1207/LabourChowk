@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Button, Card, Input } from '../components';
 import { t } from '../utils/translations';
 import { UserRole } from '../types';
+import { logger } from '../utils/logger';
 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const Register: React.FC = () => {
       localStorage.removeItem('selectedRole'); // Clean up
       navigate('/profile-setup');
     } catch (err: any) {
-      console.error('Registration error:', err);
+      logger.error('Registration error:', err);
       setError(err.message || 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
